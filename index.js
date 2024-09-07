@@ -33,7 +33,7 @@ showRoutes(app)
 bookingRoutes(app)
 
 app.listen(PORT, () => {
-    console.log(`\nServer is running successfully`);
+    console.log(`\nServer is running successfully in: ${PORT}`);
 })
 
 
