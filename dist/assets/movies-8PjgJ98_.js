@@ -1,0 +1,1 @@
+import{d as r,A as t}from"./index-CyGIF9Ci.js";const n=async()=>{try{return(await r.get(`${t}/movies`)).data}catch(e){return e.response.message}},o=async e=>{try{return(await r.get(`${t}/movie/${e}`)).data}catch(s){return s.response.message}};export{o as a,n as g};

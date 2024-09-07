@@ -27,16 +27,17 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(mongoSanitize());
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 movieRoutes(app)
 theatreRoutes(app)
 userRoutes(app)
 showRoutes(app)
 bookingRoutes(app)
+
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-  });  
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`\nServer is running successfully in: ${PORT}`);
