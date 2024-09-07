@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 const rateLimit = require("express-rate-limit")
 const mongoSanitize = require('express-mongo-sanitize');
+const path = require("path")
 
 require('dotenv').config()
 require('./config/dbConfig')
@@ -20,17 +21,22 @@ const apiLimiter = rateLimit({
   message: "Too many requests from this IP. Please try again after some time"
 })
 
+
 app.use(apiLimiter);
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(mongoSanitize());
+app.use(express.static(path.join(__dirname, 'dist')));
 
 movieRoutes(app)
 theatreRoutes(app)
 userRoutes(app)
 showRoutes(app)
 bookingRoutes(app)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  });  
 
 app.listen(PORT, () => {
     console.log(`\nServer is running successfully in: ${PORT}`);
